@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+        .plan-card-content {
+            transition: max-height 0.4s ease-in-out, visibility 0.4s ease-in-out, padding 0.4s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+            visibility: hidden;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .plan-card.open .plan-card-content {
+            max-height: 1000px;
+            visibility: visible;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        .transition-transform {
+            transition: transform 0.3s ease;
+        }
+        .summary-info {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin-top 0.3s ease-in-out;
+            max-height: 100px;
+            opacity: 1;
+        }
+        .plan-card.open .summary-info {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0 !important;
+            pointer-events: none;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Team management</h1>
+
+        <!-- Demo Cards Container -->
+        <div class="space-y-8">
+
+            <!-- 1. No Plan -->
+            <div>
+                <h2 class="text-xl font-semibold text-gray-700 mb-2">1. No Team Plan</h2>
+                <div class="bg-indigo-600 rounded-lg shadow-lg p-6 sm:p-8 text-white relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold mb-2">Unlock Your Team's Potential</h3>
+                        <p class="mb-6 text-indigo-200">Purchase a team plan to add members, manage seats, and collaborate seamlessly.</p>
+                        <button class="bg-white hover:bg-gray-200 text-indigo-600 font-bold py-2 px-6 rounded-lg transition duration-300">
+                            Explore Team Plans
+                        </button>
+                    </div>
+                    <!-- Decorative elements -->
+                    <div class="absolute top-0 right-0 -mt-8 -mr-8 opacity-20">
+                        <svg width="150" height="150" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#FFFFFF" d="M37.3,-27.2C49.8,-15.1,62.4,2.3,61.4,18.5C60.4,34.7,45.8,49.7,28.7,55.9C11.6,62.1,-8,59.5,-25.1,51.8C-42.2,44,-56.8,31.1,-62,14.6C-67.2,-1.9,-63.1,-22,-51.7,-34.5C-40.3,-47,-21.6,-52,-1.2,-51.6C19.2,-51.2,38.4,-45.4,37.3,-27.2Z" transform="translate(100 100)"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Active Plan Variations -->
+            <div>
+                <h2 class="text-xl font-semibold text-gray-700 mb-2">2. Active Plan Variations</h2>
+                <div class="space-y-4">
+                    <!-- 2a. Active - Safe -->
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-600 mb-2">2a. Active - Safe</h3>
+                        <div class="plan-card bg-white rounded-lg shadow-sm border border-gray-200">
+                            <div class="p-4 flex justify-between items-center cursor-pointer" onclick="toggleCard(this)">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800">🏫 Team Plan Details</h3>
+                                    <div class="summary-info mt-1 text-sm text-gray-500">
+                                        <span>7/10 seats used</span>
+                                        <span class="mx-1 text-gray-300">·</span>
+                                        <span>Renews Oct 1, 2026</span>
+                                    </div>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="plan-card-content px-4">
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <div class="flex items-center space-x-3 mb-3">
+                                        <h4 class="text-md font-semibold text-gray-700">Current Plan</h4>
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Active</span>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <div class="bg-white border border-gray-200 p-4 rounded-lg">
+                                            <div class="flex items-center">
+                                                <div class="flex items-center">
+                                                    <svg class="h-8 w-8 text-indigo-500 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                                    <div class="ml-3">
+                                                        <p class="text-xs text-gray-500">Start Date</p>
+                                                        <p class="text-md font-semibold text-gray-800">Sep 20, 2025</p>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow px-4"><div class="w-full border-t border-gray-300 border-dashed"></div></div>
+                                                <div class="flex items-center">
+                                                    <svg class="h-8 w-8 text-gray-400 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                                    <div class="ml-3">
+                                                        <p class="text-xs text-gray-500">End Date</p>
+                                                        <p class="text-md font-semibold text-gray-800">Oct 1, 2026</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pt-2">
+                                            <div class="flex justify-between items-center mb-1"><p class="text-sm text-gray-600">Seats</p><a href="#" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">Manage Seats</a></div>
+                                            <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-indigo-500 h-2.5 rounded-full" style="width: 70%"></div></div>
+                                            <div class="flex justify-between text-xs text-gray-500 mt-1"><span>Assigned: 7</span><span>Total: 10</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 2b. Active - Warning -->
+                    <div>
+                         <h3 class="text-lg font-medium text-gray-600 mb-2">2b. Active - Expires in ~30 days</h3>
+                        <div class="plan-card bg-white rounded-lg shadow-sm border border-gray-200">
+                            <div class="p-4 flex justify-between items-center cursor-pointer" onclick="toggleCard(this)">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800">🏫 Team Plan Details</h3>
+                                    <div class="summary-info mt-1 text-sm text-gray-500">
+                                        <span>7/10 seats used</span>
+                                        <span class="mx-1 text-gray-300">·</span>
+                                        <span class="text-yellow-600 font-medium">Expires in 29 days</span>
+                                    </div>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="plan-card-content px-4">
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <div class="flex items-center space-x-3 mb-3">
+                                        <h4 class="text-md font-semibold text-gray-700">Current Plan</h4>
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Active</span>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-3 rounded-md text-sm"><p><span class="font-bold">Your plan expires soon:</span> 29 days remaining</p></div>
+                                        <div class="bg-white border border-gray-200 p-4 rounded-lg">
+                                            <div class="flex items-center">
+                                                <div class="flex items-center"><svg class="h-8 w-8 text-indigo-500 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><div class="ml-3"><p class="text-xs text-gray-500">Start Date</p><p class="text-md font-semibold text-gray-800">Oct 20, 2024</p></div></div>
+                                                <div class="flex-grow px-4"><div class="w-full border-t border-gray-300 border-dashed"></div></div>
+                                                <div class="flex items-center"><svg class="h-8 w-8 text-gray-400 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><div class="ml-3"><p class="text-xs text-gray-500">End Date</p><p class="text-md font-semibold text-gray-800">Oct 20, 2025</p></div></div>
+                                            </div>
+                                        </div>
+                                        <div class="pt-2">
+                                            <div class="flex justify-between items-center mb-1">
+                                                <p class="text-sm text-gray-600">Seats</p>
+                                                <div class="flex items-center space-x-4">
+                                                    <a href="#" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">Manage Seats</a>
+                                                    <button class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-1 px-3 rounded-lg transition text-sm">Renew Now</button>
+                                                </div>
+                                            </div>
+                                            <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-indigo-500 h-2.5 rounded-full" style="width: 70%"></div></div>
+                                            <div class="flex justify-between text-xs text-gray-500 mt-1"><span>Assigned: 7</span><span>Total: 10</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- 2c. Active - Danger -->
+                    <div>
+                         <h3 class="text-lg font-medium text-gray-600 mb-2">2c. Active - Expires in ~7 days</h3>
+                        <div class="plan-card bg-white rounded-lg shadow-sm border border-gray-200">
+                            <div class="p-4 flex justify-between items-center cursor-pointer" onclick="toggleCard(this)">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800">🏫 Team Plan Details</h3>
+                                    <div class="summary-info mt-1 text-sm text-gray-500">
+                                        <span>7/10 seats used</span>
+                                        <span class="mx-1 text-gray-300">·</span>
+                                        <span class="text-red-600 font-medium">Expires in 7 days</span>
+                                    </div>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="plan-card-content px-4">
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <div class="flex items-center space-x-3 mb-3">
+                                        <h4 class="text-md font-semibold text-gray-700">Current Plan</h4>
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Active</span>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <div class="bg-red-100 border-l-4 border-red-500 text-red-800 p-3 rounded-md text-sm"><p><span class="font-bold">Your plan expires in 7 days!</span> Renew now to avoid service interruption.</p></div>
+                                        <div class="bg-white border border-gray-200 p-4 rounded-lg">
+                                            <div class="flex items-center">
+                                                <div class="flex items-center"><svg class="h-8 w-8 text-indigo-500 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><div class="ml-3"><p class="text-xs text-gray-500">Start Date</p><p class="text-md font-semibold text-gray-800">Sep 28, 2024</p></div></div>
+                                                <div class="flex-grow px-4"><div class="w-full border-t border-gray-300 border-dashed"></div></div>
+                                                <div class="flex items-center"><svg class="h-8 w-8 text-gray-400 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><div class="ml-3"><p class="text-xs text-gray-500">End Date</p><p class="text-md font-semibold text-gray-800">Sep 28, 2025</p></div></div>
+                                            </div>
+                                        </div>
+                                        <div class="pt-2">
+                                            <div class="flex justify-between items-center mb-1">
+                                                <p class="text-sm text-gray-600">Seats</p>
+                                                <div class="flex items-center space-x-4">
+                                                    <a href="#" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">Manage Seats</a>
+                                                    <button class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-1 px-3 rounded-lg transition text-sm">Renew Now</button>
+                                                </div>
+                                            </div>
+                                            <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-indigo-500 h-2.5 rounded-full" style="width: 70%"></div></div>
+                                            <div class="flex justify-between text-xs text-gray-500 mt-1"><span>Assigned: 7</span><span>Total: 10</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Active + Pending Plan -->
+            <div>
+                <h2 class="text-xl font-semibold text-gray-700 mb-2">3. Active + Pending Plan</h2>
+                <div class="plan-card bg-white rounded-lg shadow-sm border border-gray-200">
+                     <div class="p-4 flex justify-between items-center cursor-pointer" onclick="toggleCard(this)">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">🏫 Team Plan Details</h3>
+                            <div class="summary-info mt-1 text-sm text-gray-500">
+                                <span>7/10 seats used</span>
+                                <span class="mx-1 text-gray-300">·</span>
+                                <span class="text-gray-500">Next plan starts Oct 1, 2025</span>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </div>
+                    <div class="plan-card-content px-4 space-y-4">
+                        <!-- Current Plan Section -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <h4 class="text-md font-semibold text-gray-700">Current Plan</h4>
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Active</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="bg-white border border-gray-200 p-4 rounded-lg">
+                                    <div class="flex items-center">
+                                        <!-- Start Date -->
+                                        <div class="flex items-center">
+                                            <svg class="h-8 w-8 text-indigo-500 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                            <div class="ml-3">
+                                                <p class="text-xs text-gray-500">Start Date</p>
+                                                <p class="text-md font-semibold text-gray-800">Sep 20, 2025</p>
+                                            </div>
+                                        </div>
+                                
+                                        <!-- Divider -->
+                                        <div class="flex-grow px-4">
+                                            <div class="w-full border-t border-gray-300 border-dashed"></div>
+                                        </div>
+                                
+                                        <!-- End Date -->
+                                        <div class="flex items-center">
+                                            <svg class="h-8 w-8 text-gray-400 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                            <div class="ml-3">
+                                                <p class="text-xs text-gray-500">End Date</p>
+                                                <p class="text-md font-semibold text-gray-800">Oct 1, 2025</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pt-2">
+                                    <div class="flex justify-between items-center mb-1"><p class="text-sm text-gray-600">Seats</p><a href="#" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">Manage Seats</a></div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-indigo-500 h-2.5 rounded-full" style="width: 70%"></div></div>
+                                    <div class="flex justify-between text-xs text-gray-500 mt-1"><span>Assigned: 7</span><span>Total: 10</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pending Plan Section -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                             <div class="flex items-center space-x-3 mb-3"><h4 class="text-md font-semibold text-gray-700">Pending Plan</h4><span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Scheduled</span></div>
+                             <div class="space-y-4">
+                                <div class="bg-indigo-50 p-4 rounded-lg flex items-center space-x-4 border border-indigo-100">
+                                    <div class="bg-indigo-100 p-3 rounded-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-2xl font-bold text-indigo-900">15</p>
+                                        <p class="text-sm text-gray-600">Seats Purchased</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white border border-gray-200 p-4 rounded-lg">
+                                    <div class="flex items-center">
+                                        <!-- Start Date -->
+                                        <div class="flex items-center">
+                                            <svg class="h-8 w-8 text-indigo-500 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                            <div class="ml-3">
+                                                <p class="text-xs text-gray-500">Start Date</p>
+                                                <p class="text-md font-semibold text-gray-800">Oct 1, 2025</p>
+                                            </div>
+                                        </div>
+                                
+                                        <!-- Divider -->
+                                        <div class="flex-grow px-4">
+                                            <div class="w-full border-t border-gray-300 border-dashed"></div>
+                                        </div>
+                                
+                                        <!-- End Date -->
+                                        <div class="flex items-center">
+                                            <svg class="h-8 w-8 text-gray-400 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                            <div class="ml-3">
+                                                <p class="text-xs text-gray-500">End Date</p>
+                                                <p class="text-md font-semibold text-gray-800">Oct 1, 2026</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="grid sm:grid-cols-2 gap-3">
+                                        <button class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg transition">Change Schedule</button>
+                                        <button class="w-full bg-gray-200 text-gray-500 font-bold py-2 px-4 rounded-lg text-sm cursor-not-allowed" disabled>Activate Now</button>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-2 text-center">Cannot activate while another plan is active.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Pending Plan (Scheduled) -->
+            <div>
+                 <h2 class="text-xl font-semibold text-gray-700 mb-2">4. Pending Plan (Scheduled)</h2>
+                 <div class="plan-card bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="p-4 flex justify-between items-center cursor-pointer" onclick="toggleCard(this)">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">🏫 Team Plan Details</h3>
+                            <div class="summary-info mt-1 text-sm text-gray-500">
+                                <span>15 seats purchased</span>
+                                <span class="mx-1 text-gray-300">·</span>
+                                <span>Starts Oct 1, 2025</span>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                     <div class="plan-card-content px-4">
+                         <div class="bg-gray-50 p-4 rounded-lg">
+                             <div class="flex items-center space-x-3 mb-3"><h4 class="text-md font-semibold text-gray-700">Pending Plan</h4><span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Scheduled</span></div>
+                             <div class="space-y-4">
+                                <div class="bg-indigo-50 p-4 rounded-lg flex items-center space-x-4 border border-indigo-100">
+                                    <div class="bg-indigo-100 p-3 rounded-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-2xl font-bold text-indigo-900">15</p>
+                                        <p class="text-sm text-gray-600">Seats Purchased</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white border border-gray-200 p-4 rounded-lg">
+                                    <div class="flex items-center">
+                                        <!-- Start Date -->
+                                        <div class="flex items-center">
+                                            <svg class="h-8 w-8 text-indigo-500 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                            <div class="ml-3">
+                                                <p class="text-xs text-gray-500">Start Date</p>
+                                                <p class="text-md font-semibold text-gray-800">Oct 1, 2025</p>
+                                            </div>
+                                        </div>
+                                
+                                        <!-- Divider -->
+                                        <div class="flex-grow px-4">
+                                            <div class="w-full border-t border-gray-300 border-dashed"></div>
+                                        </div>
+                                
+                                        <!-- End Date -->
+                                        <div class="flex items-center">
+                                            <svg class="h-8 w-8 text-gray-400 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                            <div class="ml-3">
+                                                <p class="text-xs text-gray-500">End Date</p>
+                                                <p class="text-md font-semibold text-gray-800">Oct 1, 2026</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col sm:flex-row gap-2">
+                                    <button class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg transition">Change Schedule</button>
+                                    <button class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition">Activate Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Pending Plan (Not Scheduled) -->
+            <div>
+                 <h2 class="text-xl font-semibold text-gray-700 mb-2">5. Pending Plan (Not Scheduled)</h2>
+                 <div class="plan-card bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="p-4 flex justify-between items-center cursor-pointer" onclick="toggleCard(this)">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">🏫 Team Plan Details</h3>
+                            <div class="summary-info mt-1 text-sm text-gray-500">
+                                <span>15 seats purchased</span>
+                                <span class="mx-1 text-gray-300">·</span>
+                                <span class="text-red-600 font-medium">Action required</span>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </div>
+                    <div class="plan-card-content px-4">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-center space-x-3 mb-3"><h4 class="text-md font-semibold text-gray-700">Pending Plan</h4><span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Not Scheduled</span></div>
+                            <div class="space-y-4">
+                                <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-800 p-3 rounded-md text-sm"><p><span class="font-bold">Your new plan is ready.</span> Activate it now or schedule it to start later.</p></div>
+                                <div class="bg-indigo-50 p-4 rounded-lg flex items-center space-x-4 border border-indigo-100">
+                                    <div class="bg-indigo-100 p-3 rounded-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-2xl font-bold text-indigo-900">15</p>
+                                        <p class="text-sm text-gray-600">Seats Purchased</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col sm:flex-row gap-2 pt-2">
+                                    <button class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition">Activate Now</button>
+                                    <button class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg transition">Schedule Start Date</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+
+            <!-- 6. Expired Plan -->
+            <div>
+                <h2 class="text-xl font-semibold text-gray-700 mb-2">6. Expired Plan</h2>
+                <div class="plan-card bg-white rounded-lg shadow-sm border border-gray-200">
+                   <div class="p-4 flex justify-between items-center cursor-pointer" onclick="toggleCard(this)">
+                       <div>
+                           <h3 class="text-lg font-semibold text-gray-800">🏫 Team Plan Details</h3>
+                           <div class="summary-info mt-1 text-sm text-gray-500">
+                               <span>10 seats</span>
+                               <span class="mx-1 text-gray-300">·</span>
+                               <span class="text-red-600 font-medium">Expired on Sep 20, 2025</span>
+                           </div>
+                       </div>
+                       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                   </div>
+                   <div class="plan-card-content px-4">
+                       <div class="bg-gray-50 p-4 rounded-lg">
+                           <div class="flex items-center space-x-3 mb-3">
+                               <h4 class="text-md font-semibold text-gray-700">Expired Plan</h4>
+                               <span class="bg-gray-200 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Expired</span>
+                           </div>
+                           <div class="space-y-3">
+                               <div class="bg-indigo-50 p-4 rounded-lg flex items-center space-x-4 border border-indigo-100">
+                                    <div class="bg-indigo-100 p-3 rounded-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-2xl font-bold text-indigo-900">10</p>
+                                        <p class="text-sm text-gray-600">Seats Purchased</p>
+                                    </div>
+                                </div>
+                               <div class="bg-white border border-gray-200 p-4 rounded-lg">
+                                   <div class="flex items-center">
+                                       <div class="flex items-center">
+                                           <svg class="h-8 w-8 text-indigo-500 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                           <div class="ml-3">
+                                               <p class="text-xs text-gray-500">Start Date</p>
+                                               <p class="text-md font-semibold text-gray-800">Sep 20, 2024</p>
+                                           </div>
+                                       </div>
+                                       <div class="flex-grow px-4"><div class="w-full border-t border-gray-300 border-dashed"></div></div>
+                                       <div class="flex items-center">
+                                           <svg class="h-8 w-8 text-gray-400 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                           <div class="ml-3">
+                                               <p class="text-xs text-gray-500">End Date</p>
+                                               <p class="text-md font-semibold text-gray-800">Sep 20, 2025</p>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="pt-2">
+                                   <button class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg transition">Purchase New Plan</button>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+           </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleCard(headerElement) {
+            const card = headerElement.closest('.plan-card');
+            const icon = headerElement.querySelector('svg');
+            
+            card.classList.toggle('open');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Open the first plan card by default
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstPlanCard = document.querySelector('.plan-card');
+            if (firstPlanCard) {
+                // We don't open the promo banner, so we target the first "real" card
+                const firstCollapsibleCard = document.querySelectorAll('.plan-card')[0];
+                 if(firstCollapsibleCard) {
+                    firstCollapsibleCard.classList.add('open');
+                    firstCollapsibleCard.querySelector('svg').classList.add('rotate-180');
+                 }
+            }
+        });
+    </script>
+
+</body>
+</html>
